@@ -27,43 +27,34 @@ add_action( 'init', 'pmproacr_init_email_templates', 8 ); // Priority 8 to ensur
  * @return array The email templates.
  */
 function pmproacr_email_templates( $templates ) {
-	// Allowed strings for kses checks below.
-	$allowed_html = array(
-		'a' => array(
-			'href' => array(),
-			'title' => array(),
-		),
-		'p' => array(),
-	);
-
 	$templates['pmproacr_reminder_1'] = array(
 		'description' => esc_html__( 'Abandoned Cart Recovery - Reminder 1', 'pmpro-abandoned-cart-recovery' ),
 		'subject'     => esc_html__( 'Your membership is waiting.', 'pmpro-abandoned-cart-recovery' ),
-		'body'        => '<p>' . esc_html__( 'We noticed you started signing up for !!membership_level_name!! membership but did not complete the checkout process.', 'pmpro-abandoned-cart-recovery' ) . '</p>
+		'body'        => wp_kses_post( __( '<p>We noticed you started signing up for !!membership_level_name!! membership but did not complete the checkout process.</p>
 
-' . wp_kses( __( '<p><a href="!!checkout_url!!">Click here to complete membership checkout now</a>.</p>', 'pmpro-abandoned-cart-recovery' ), $allowed_html ) . '
+<p><a href="!!checkout_url!!">Click here to complete membership checkout now</a>.</p>
 
-<p>' . wp_kses( __( 'If you do not want to receive any more emails about this attempted checkout, <a href="!!opt_out_url!!">click here to opt out of future emails</a>.', 'pmpro-abandoned-cart-recovery' ), $allowed_html ) . '</p>',
+<p>If you do not want to receive any more emails about this attempted checkout, <a href="!!opt_out_url!!">click here to opt out of future emails</a>.</p>', 'pmpro-abandoned-cart-recovery' ) ),
 		'help_text'   => esc_html__( 'This email is sent as the first reminder to complete a purchase.', 'pmpro-abandoned-cart-recovery' )
 	);
 
 	$templates['pmproacr_reminder_2'] = array(
 		'description' => esc_html__( 'Abandoned Cart Recovery - Reminder 2', 'pmpro-abandoned-cart-recovery' ),
 		'subject'     => esc_html__( 'Reminder: Your !!sitename!! membership is waiting.', 'pmpro-abandoned-cart-recovery' ),
-		'body'        => '<p>' . esc_html__( 'It looks like you may have forgotten to complete checkout for the !!membership_level_name!! membership at !!sitename!!.', 'pmpro-abandoned-cart-recovery' ) . '</p>
+		'body'        => wp_kses_post( __( '<p>It looks like you may have forgotten to complete checkout for the !!membership_level_name!! membership at !!sitename!!.</p>
 
-<p><a href="!!checkout_url!!">' . esc_html__( 'Complete Your Purchase Now', 'pmpro-abandoned-cart-recovery' ) . '</a></p>
+<p><a href="!!checkout_url!!">Complete Your Purchase Now</a></p>
 
-<p>' . wp_kses( __( 'If you do not want to receive any more emails about this attempted checkout, <a href="!!opt_out_url!!">click here to opt out of these emails</a>.', 'pmpro-abandoned-cart-recovery' ), $allowed_html ) . '</p>',
+<p>If you do not want to receive any more emails about this attempted checkout, <a href="!!opt_out_url!!">click here to opt out of these emails</a>.</p>', 'pmpro-abandoned-cart-recovery' ) ),
 		'help_text'   => esc_html__( 'This email is sent as the second reminder to complete a purchase.', 'pmpro-abandoned-cart-recovery' )
 	);
 
 	$templates['pmproacr_reminder_3'] = array(
 		'description' => esc_html__( 'Abandoned Cart Recovery - Reminder 3', 'pmpro-abandoned-cart-recovery' ),
 		'subject'     => esc_html__( 'Final Reminder: Complete membership checkout at !!sitename!! today.', 'pmpro-abandoned-cart-recovery' ),
-		'body'        => '<p>' . esc_html__( 'This is your final reminder to complete your !!membership_level_name!! membership checkout at !!sitename!!.', 'pmpro-abandoned-cart-recovery' ) . '</p>
+		'body'        => wp_kses_post( __( '<p>This is your final reminder to complete your !!membership_level_name!! membership checkout at !!sitename!!.</p>
 
-<p><a href="!!checkout_url!!">' . esc_html__( 'Complete Your Purchase Now', 'pmpro-abandoned-cart-recovery' ) . '</a></p>',
+<p><a href="!!checkout_url!!">Complete Your Purchase Now</a></p>', 'pmpro-abandoned-cart-recovery' ) ),
 		'help_text'   => esc_html__( 'This email is sent as the third reminder to complete a purchase.', 'pmpro-abandoned-cart-recovery' )
 	);
 
