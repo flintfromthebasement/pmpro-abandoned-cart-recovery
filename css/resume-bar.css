@@ -1,15 +1,23 @@
 /**
  * Resume Checkout Bar — popup, sticky bar, and dismiss confirmation styles.
+ *
+ * Everything is scoped under #pmproacr-resume-root so theme buttons (Memberlite, etc.)
+ * can't leak their own backgrounds, colors, font-weights, box-shadows, or hover states
+ * into our modal and bar.
  */
 
-.pmproacr-resume-overlay {
+#pmproacr-resume-root {
+	color-scheme: light;
+}
+
+#pmproacr-resume-root .pmproacr-resume-overlay {
 	position: fixed;
 	inset: 0;
 	background: rgba( 17, 24, 39, 0.55 );
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 9998;
+	z-index: 99998;
 	padding: 16px;
 	animation: pmproacr-resume-fade-in 180ms ease-out;
 }
@@ -19,7 +27,7 @@
 	to   { opacity: 1; }
 }
 
-.pmproacr-resume-modal {
+#pmproacr-resume-root .pmproacr-resume-modal {
 	background: #ffffff;
 	color: #111827;
 	max-width: 460px;
@@ -36,82 +44,110 @@
 	to   { transform: translateY( 0 )    scale( 1 );    opacity: 1; }
 }
 
-.pmproacr-resume-modal__headline {
+#pmproacr-resume-root .pmproacr-resume-modal__headline {
 	margin: 0 0 12px;
 	font-size: 22px;
 	line-height: 1.25;
 	font-weight: 600;
+	color: #111827;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-.pmproacr-resume-modal__body {
+#pmproacr-resume-root .pmproacr-resume-modal__body {
 	margin: 0 0 22px;
 	font-size: 15px;
 	line-height: 1.5;
 	color: #374151;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-.pmproacr-resume-modal__body a {
-	color: inherit;
+#pmproacr-resume-root .pmproacr-resume-modal__body a {
+	color: #2563eb;
 	text-decoration: underline;
 }
 
-.pmproacr-resume-modal__actions {
+#pmproacr-resume-root .pmproacr-resume-modal__body a:hover,
+#pmproacr-resume-root .pmproacr-resume-modal__body a:focus {
+	color: #1d4ed8;
+	text-decoration: underline;
+}
+
+#pmproacr-resume-root .pmproacr-resume-modal__actions {
 	display: flex;
 	gap: 10px;
 	justify-content: flex-end;
 	flex-wrap: wrap;
 }
 
-.pmproacr-resume-modal__primary,
-.pmproacr-resume-modal__secondary {
-	font: inherit;
+/* Shared button reset — neutralize whatever Memberlite/the active theme applies. */
+#pmproacr-resume-root .pmproacr-resume-modal__primary,
+#pmproacr-resume-root .pmproacr-resume-modal__secondary {
+	-webkit-appearance: none;
+	appearance: none;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1.2;
 	padding: 10px 18px;
 	border-radius: 6px;
-	cursor: pointer;
 	border: 1px solid transparent;
-	line-height: 1.2;
+	cursor: pointer;
+	text-shadow: none;
+	box-shadow: none;
+	transition: background-color 120ms ease-out, color 120ms ease-out, border-color 120ms ease-out;
 }
 
-.pmproacr-resume-modal__primary {
+#pmproacr-resume-root .pmproacr-resume-modal__primary {
 	background: #2563eb;
 	color: #ffffff;
 	border-color: #2563eb;
 }
 
-.pmproacr-resume-modal__primary:hover,
-.pmproacr-resume-modal__primary:focus {
+#pmproacr-resume-root .pmproacr-resume-modal__primary:hover,
+#pmproacr-resume-root .pmproacr-resume-modal__primary:focus,
+#pmproacr-resume-root .pmproacr-resume-modal__primary:active {
 	background: #1d4ed8;
+	color: #ffffff;
 	border-color: #1d4ed8;
+	box-shadow: none;
 }
 
-.pmproacr-resume-modal__primary--danger {
+#pmproacr-resume-root .pmproacr-resume-modal__primary--danger {
 	background: #dc2626;
+	color: #ffffff;
 	border-color: #dc2626;
 }
 
-.pmproacr-resume-modal__primary--danger:hover,
-.pmproacr-resume-modal__primary--danger:focus {
+#pmproacr-resume-root .pmproacr-resume-modal__primary--danger:hover,
+#pmproacr-resume-root .pmproacr-resume-modal__primary--danger:focus,
+#pmproacr-resume-root .pmproacr-resume-modal__primary--danger:active {
 	background: #b91c1c;
+	color: #ffffff;
 	border-color: #b91c1c;
+	box-shadow: none;
 }
 
-.pmproacr-resume-modal__secondary {
-	background: #ffffff;
-	color: #374151;
+#pmproacr-resume-root .pmproacr-resume-modal__secondary {
+	background: #f3f4f6;
+	color: #1f2937;
 	border-color: #d1d5db;
 }
 
-.pmproacr-resume-modal__secondary:hover,
-.pmproacr-resume-modal__secondary:focus {
-	background: #f3f4f6;
+#pmproacr-resume-root .pmproacr-resume-modal__secondary:hover,
+#pmproacr-resume-root .pmproacr-resume-modal__secondary:focus,
+#pmproacr-resume-root .pmproacr-resume-modal__secondary:active {
+	background: #e5e7eb;
+	color: #111827;
+	border-color: #9ca3af;
+	box-shadow: none;
 }
 
-.pmproacr-resume-bar {
+#pmproacr-resume-root .pmproacr-resume-bar {
 	position: fixed;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	z-index: 9997;
+	z-index: 99997;
 	background: #111827;
 	color: #ffffff;
 	padding: 12px 16px;
@@ -130,31 +166,43 @@
 	to   { transform: translateY( 0 ); }
 }
 
-.pmproacr-resume-bar__text {
+#pmproacr-resume-root .pmproacr-resume-bar__text {
 	font-size: 15px;
 	line-height: 1.3;
+	color: #ffffff;
 }
 
-.pmproacr-resume-bar__button {
+#pmproacr-resume-root .pmproacr-resume-bar__button {
+	-webkit-appearance: none;
+	appearance: none;
 	background: #f97316;
 	color: #ffffff !important;
 	padding: 8px 18px;
 	border-radius: 6px;
 	font-weight: 600;
-	text-decoration: none !important;
 	font-size: 15px;
 	line-height: 1.2;
 	border: 1px solid #f97316;
+	text-decoration: none !important;
+	text-shadow: none;
+	box-shadow: none;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	transition: background-color 120ms ease-out, border-color 120ms ease-out;
 }
 
-.pmproacr-resume-bar__button:hover,
-.pmproacr-resume-bar__button:focus {
+#pmproacr-resume-root .pmproacr-resume-bar__button:hover,
+#pmproacr-resume-root .pmproacr-resume-bar__button:focus,
+#pmproacr-resume-root .pmproacr-resume-bar__button:active {
 	background: #ea580c;
-	border-color: #ea580c;
 	color: #ffffff !important;
+	border-color: #ea580c;
+	box-shadow: none;
+	text-decoration: none !important;
 }
 
-.pmproacr-resume-bar__close {
+#pmproacr-resume-root .pmproacr-resume-bar__close {
+	-webkit-appearance: none;
+	appearance: none;
 	background: transparent;
 	color: #ffffff;
 	border: 1px solid rgba( 255, 255, 255, 0.4 );
@@ -168,12 +216,20 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	font-weight: 400;
+	box-shadow: none;
+	text-shadow: none;
+	transition: background-color 120ms ease-out, border-color 120ms ease-out;
 }
 
-.pmproacr-resume-bar__close:hover,
-.pmproacr-resume-bar__close:focus {
+#pmproacr-resume-root .pmproacr-resume-bar__close:hover,
+#pmproacr-resume-root .pmproacr-resume-bar__close:focus,
+#pmproacr-resume-root .pmproacr-resume-bar__close:active {
 	background: rgba( 255, 255, 255, 0.12 );
+	color: #ffffff;
 	border-color: rgba( 255, 255, 255, 0.7 );
+	box-shadow: none;
 }
 
 body.has-pmproacr-resume-bar {
@@ -181,18 +237,18 @@ body.has-pmproacr-resume-bar {
 }
 
 @media ( max-width: 480px ) {
-	.pmproacr-resume-bar {
+	#pmproacr-resume-root .pmproacr-resume-bar {
 		padding: 10px 12px;
 		gap: 10px;
 	}
-	.pmproacr-resume-bar__text {
+	#pmproacr-resume-root .pmproacr-resume-bar__text {
 		flex: 1 1 100%;
 		text-align: center;
 	}
-	.pmproacr-resume-modal {
+	#pmproacr-resume-root .pmproacr-resume-modal {
 		padding: 22px 20px 18px;
 	}
-	.pmproacr-resume-modal__headline {
+	#pmproacr-resume-root .pmproacr-resume-modal__headline {
 		font-size: 20px;
 	}
 }
